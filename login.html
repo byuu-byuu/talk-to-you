@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talk To You Login Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #8f7285; /* Dark Modern Background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Glowing Background Orbs */
+    .glow-1, .glow-2 {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 1;
+    }
+    .glow-1 {
+      width: 300px;
+      height: 300px;
+      background: #3b82f6;
+      top: 15%;
+      left: 30%;
+    }
+    .glow-2 {
+      width: 250px;
+      height: 250px;
+      background: #8b5cf6;
+      bottom: 15%;
+      right: 30%;
+    }
+
+    /* Glass Card Container */
+    .glass-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .header .logo {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    .header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .header p {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-box input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+    }
+
+    .form-options a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    .divider {
+      text-align: center;
+      margin: 24px 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .divider span {
+      position: relative;
+      background: #0b0f19;
+      padding: 0 12px;
+      color: #64748b;
+      font-size: 12px;
+    }
+    .btn-google {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-google:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-google img {
+      width: 18px;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .footer-text a {
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Glow Effects -->
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <!-- Main Login Card -->
+  <div class="glass-card">
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-paper-plane"></i></div>
+      <h2>Talk To You</h2>
+      <p>Welcome back! Please enter your details.</p>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-box">
+          <i class="fa-regular fa-envelope"></i>
+          <input type="email" placeholder="name@domain.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-box">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" placeholder="" required>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label><input type="checkbox"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-submit">Sign In</button>
+    </form>
+
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <button type="button" class="btn-google">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+      Continue with Google
+    </button>
+
+    <div class="footer-text">
+      Don't have an account? <a href="#">Sign up</a>
+    </div>
+  </div>
+
+
+  <script type="module">
+        import { 
+            auth, 
+            googleProvider, 
+            signInWithPopup, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword,
+            onAuthStateChanged 
+        } from "./firebase-config.js";
+
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const loginBtn = document.getElementById("loginBtn");
+        const signupBtn = document.getElementById("signupBtn");
+        const googleBtn = document.getElementById("googleBtn");
+
+        // ၁။ User Login ဝင်ထားပြီးသားဆိုရင် home.html သို့ တန်းပို့မည်
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = "index.html";
+            }
+        });
+
+        // ၂။ Sign Up ပြုလုပ်ခြင်း
+        signupBtn.addEventListener("click", async () => {
+            try {
+                await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                alert("Account Created Successfully!");
+                window.location.href = "index.html";
+            } catch (error) {
+                alert("Signup Error: " + error.message);
+            }
+        });
+
+        // ၃။ Login ဝင်ခြင်း
+        loginBtn.addEventListener("click", async () => {
+            try {
+                await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                alert("Logged In Successfully!");
+                window.location.href = "index.html";
+            } catch (error) {
+                alert("Login Error: " + error.message);
+            }
+        });
+
+        // ၄။ Google အကောင့်ဖြင့် Login ဝင်ခြင်း
+        googleBtn.addEventListener("click", async () => {
+            try {
+                await signInWithPopup(auth, googleProvider);
+                alert("Google Login Successful!");
+                window.location.href = "index.html";
+            } catch (error) {
+                alert("Google Login Error: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

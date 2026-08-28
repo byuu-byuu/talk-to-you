@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talk to You - Video Chat</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+
+  <!-- form here form here from here-->
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+
+    <!-- Socket.io လိုအပ်သော Library ချိတ်ခြင်း (Server ကနေ အလိုအလျောက် ယူသုံးပါတယ်) -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- ကိုယ့်ရဲ့ JavaScript ဖိုင် (project.js) ချိတ်ခြင်း -->
+    <script src="project.js"></script>
+   <!-- to here to here to here-->
+
+  <div class="app-container">
+    
+    <!-- 1. LEFT SIDEBAR NAV -->
+ <!--    <aside class="sidebar-nav">
+      
+      <div class="logo" onclick="toggleMessagePanel()" title="Toggle Message Panel" style="cursor: pointer;">
+        <i class="fa-solid fa-comments"></i>
+      </div>
+      
+      <div class="nav-icons">
+        <button class="nav-btn" onclick="openPanel('profileTab', this)" title="Profile"><i class="fa-regular fa-user"></i></button>
+        <button class="nav-btn" onclick="openPanel('searchTab', this)" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="nav-btn" onclick="openPanel('settingsTab', this)" title="Settings"><i class="fa-solid fa-gear"></i></button>
+        <button class="nav-btn" onclick="openPanel('notiTab', this)" title="Notifications"><i class="fa-regular fa-bell"></i></button>
+      </div>
+    </aside> -->
+    <!-- MODIFICATION 1.LEFT SIDEBAR NAV -->
+     <!-- 1. LEFT SIDEBAR NAV -->
+<aside class="sidebar-nav">
+  <!-- Mouseover event added to open the panel -->
+  <div class="logo" onmouseenter="openMessagePanel()" title="Chat Box" style="cursor: pointer;">
+    <i class="fa-solid fa-comments"></i>
+  </div>
+  
+  <div class="nav-icons">
+    <button class="nav-btn" onclick="openPanel('profileTab', this)" title="Profile"><i class="fa-regular fa-user"></i></button>
+    <button class="nav-btn" onclick="openPanel('searchTab', this)" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button class="nav-btn" onclick="openPanel('settingsTab', this)" title="Settings"><i class="fa-solid fa-gear"></i></button>
+    <button class="nav-btn" onclick="openPanel('notiTab', this)" title="Notifications"><i class="fa-regular fa-bell"></i></button>
+  </div>
+</aside>
+
+
+    <!-- 2. GLASS PANEL FOR OTHER TABS -->
+    <main id="mainPanel" class="glass-panel hidden">
+      <!-- PROFILE TAB -->
+      <!-- <section id="profileTab" class="tab-page hidden">
+        <h3>User Profile</h3>
+        <div class="avatar-upload-section">
+          <img id="profilePreview" src="https://via.placeholder.com/80" alt="Avatar">
+          <input type="file" id="avatarInput" accept="image/*" onchange="previewImage(event)">
+          <label for="avatarInput" class="upload-btn"><i class="fa-solid fa-camera"></i> Upload Picture</label>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-box"><span class="stat-number" id="followersCount">0</span><span class="stat-label">Followers</span></div>
+          <div class="stat-box"><span class="stat-number" id="followingCount">0</span><span class="stat-label">Following</span></div>
+        </div>
+        <form id="profileForm" onsubmit="saveProfileData(event)">
+          <div class="input-group"><label>Display Name</label><input type="text" id="profDisplayName" required></div>
+          <div class="input-group"><label>Date of Birth</label><input type="date" id="profDob" required></div>
+          <div class="input-group"><label>Bio</label><textarea id="profBio" rows="3"></textarea></div>
+          <button type="submit" class="btn-primary">Save Profile Data</button>
+        </form>
+      </section> -->
+      <!-- F r o m h e r e -->
+       <!-- PROFILE TAB -->
+        <section id="profileTab" class="tab-page hidden">
+          <h3>User Profile</h3>
+          
+          <!-- <div class="profile-card-container">
+            <-- Profile Display Box (Top Section) --
+            <div class="profile-header-display">
+              <div class="avatar-wrapper">
+                <img id="profilePreview" src="https://via.placeholder.com/100" alt="Avatar">
+                <input type="file" id="avatarInput" accept="image/*" onchange="previewImage(event)">
+                <label for="avatarInput" class="upload-btn-overlay" id="uploadBtnLabel">
+                  <i class="fa-solid fa-camera"></i> <span id="uploadBtnText">Upload Picture</span>
+                </label>
+              </div> -->
+              <!-- f r o m h e r e -->
+               <div class="profile-card-container">
+                <!-- Profile Display Box (Top Section) -->
+                <div class="profile-header-display">
+                  <div class="avatar-wrapper">
+                    <img id="profilePreview" src="https://via.placeholder.com/100" alt="Avatar">
+                    <input type="file" id="avatarInput" accept="image/*" onchange="previewImage(event)">
+                    <!-- Circle Arc ပေါ်ရှိ Icon Badge -->
+                    <label for="avatarInput" class="avatar-badge-btn" id="uploadBtnLabel">
+                      <i class="fa-solid fa-camera" id="avatarBadgeIcon"></i>
+                    </label>
+                  </div>
+               <!-- t o h e r e -->
+
+              <div class="user-text-info">
+                <h4 id="displayHandle" class="user-handle-text">@username</h4>
+                <p id="displayNickname" class="user-nickname-text">Nickname</p>
+                <div class="bio-container">
+                  <span class="bio-title">Bio:</span>
+                  <p id="displayUserBio" class="user-bio-text">No bio added yet.</p>
+                </div>
+              </div>
+            </div>
+
+            
+           <!-- Profile Stats -->
+            <div class="profile-stats">
+              <div class="stat-box">
+                <span class="stat-number" id="followersCount">0</span>
+                <span class="stat-label">Followers</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="followingCount">0</span>
+                <span class="stat-label">Following</span>
+              </div>
+            </div>
+            <button type="button" class="btn-edit-profile" id="editProfileBtn" onclick="toggleProfileForm()">
+              <i class="fa-solid fa-pen"></i> Edit Profile Data
+            </button> 
+          
+            <!-- Profile Card Section -->
+            <div class="profile-actions-container">
+              <button id="profileFollowBtn" class="action-btn follow" onclick="handleProfileFollow()">Follow</button>
+              <button id="profileMsgBtn" class="action-btn message" onclick="openMessagePanel()">
+                <i class="fas fa-comment"></i> Message
+              </button>
+            </div>
+
+            <!-- Profile Input Form -->
+            <form id="profileForm" class="profile-form" onsubmit="saveProfileData(event)">
+              <div class="input-group">
+                <label>Username (@unique)</label>
+                <input type="text" id="profUsername" placeholder="e.g. su_su99" required>
+              </div>
+              <div class="input-group">
+                <label>Nickname</label>
+                <input type="text" id="profNickname" placeholder="e.g. Su Su" required>
+              </div>
+              <div class="input-group">
+                <label>Date of Birth</label>
+                <input type="date" id="profDob" required>
+              </div>
+              <div class="input-group">
+                <label>Bio (Max 25 characters)</label>
+                <textarea id="profBio" rows="2" maxlength="25" placeholder="Tell us about yourself..." oninput="updateBioCounter()"></textarea>
+                <small class="bio-counter"><span id="bioCharCount">0</span>/25</small>
+              </div>
+              <button type="submit" class="btn-primary">Save Profile Data</button>
+            </form>
+          </div>
+        </section>
+
+      <!-- t o h e r e  -->
+
+      <!-- SEARCH TAB -->
+      <section id="searchTab" class="tab-page hidden">
+        <h3>Search Users</h3>
+        <input type="text" placeholder="Search by username..." class="search-input">
+      </section>
+
+      <!-- SETTINGS TAB -->
+      <section id="settingsTab" class="tab-page hidden">
+        <h3>Settings</h3>
+        <div class="setting-group"><label><input type="checkbox" id="setOnlineStatus" checked> Show Online Status</label></div>
+        <div class="setting-group"><label><input type="checkbox" id="setPushNotif" checked> Push Notifications</label></div>
+        <button class="btn-primary" onclick="alert('Settings Saved!')">Save Settings</button>
+      </section>
+
+      <!-- NOTIFICATIONS TAB -->
+      <section id="notiTab" class="tab-page hidden">
+        <h3>Notifications</h3>
+        <h4>Follow Requests</h4>
+        <ul id="requestsList" class="request-list"></ul>
+        </section>
+    </main>
+<!-- 3. SLIDING MESSAGE PANEL (Desktop 50% Width) -->
+    <!-- <div id="messagePanel" class="message-half-panel hidden">
+      <div class="sidebar-inside-panel">
+        <div class="sidebar-header"><i class="fa-solid fa-user"></i> My Profile</div>
+        <div class="user-card">
+          <div class="avatar">U</div>
+          <div class="user-info">
+            <div class="name">User</div>
+            <div class="status">● Online</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-area-inside-panel">
+        <div class="chat-header">
+          <h3><i class="fa-solid fa-comments"></i> Chat Room</h3>
+          <button class="close-msg-btn" onclick="toggleMessagePanel()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-bubble received">Hello! Connected to random user.</div>
+        </div>
+        <form class="chat-input-area" id="panelChatForm" onsubmit="handlePanelChatSubmit(event)">
+          <input type="text" id="panelChatInput" placeholder="Type a message..." required />
+          <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+ -->
+    <!-- MODIFICATION 3.SLIDING MESSAGING PANNEL -->
+     <!-- 3. SLIDING MESSAGE PANEL -->
+<div id="messagePanel" class="message-half-panel hidden">
+  <!-- Left Side: Chat List Item -->
+  <div class="sidebar-inside-panel">
+    <div class="sidebar-header"><i class="fa-solid fa-comments"></i> Chats</div>
+    <div class="user-card active-chat-item">
+      <div class="avatar" id="chatListAvatar">P</div>
+      <div class="user-info">
+        <div class="name" id="chatListName">Partner</div>
+        <div class="status">● Active Chat</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Chat Box with Dynamic Nickname Header -->
+  <div class="chat-area-inside-panel">
+    <div class="chat-header">
+      <h3>
+        <i class="fa-solid fa-message"></i> 
+        <span id="chatRoomHeader">Partner</span>
+      </h3>
+      <button class="close-msg-btn" onclick="closeMessagePanel()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble received">Hello! Connected to random user.</div>
+    </div>
+    <form class="chat-input-area" id="panelChatForm" onsubmit="handlePanelChatSubmit(event)">
+      <input type="text" id="panelChatInput" placeholder="Type a message..." required />
+      <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+</div>
+
+    <!-- 4. MAIN VIDEO CONTAINER -->
+    <div class="main-container">
+      <div class="header">
+        <div class="brand">
+          <i data-lucide="message-square"></i>
+          <span>ChatHub</span>
+        </div>
+        <div class="status-indicator">
+          <span class="dot"></span>
+          <span id="matchStatus">Press Start to Match</span>
+        </div>
+      </div>
+
+      <!-- <div class="video-grid">
+        Partner Video Card
+        <div class="video-card">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <span class="label video-label-br" id="remoteLabel">Offline</span>
+        </div> -->
+       <!--  INSERTION1 OFFLINE ကို ဘယ်ဘက်အောက်ရွှေ့ -->
+         <!-- Video Grid Area -->
+<div class="video-grid">
+  <!-- Remote Partner Panel (ဘယ်ဘက်အောက် ရောက်စေရန် video-label-bl ထည့်ထားသည်) -->
+ <!-- Partner Video Tag & Overlay Label -->
+<div class="video-card">
+  <video id="remoteVideo" autoplay playsinline></video>
+  <div class="video-label-container">
+    <span id="remoteLabel">Offline</span>
+    <button id="videoFollowBtn" class="follow-btn hidden" onclick="handleVideoFollow()">Follow</button>
+  </div>
+</div>
+
+  <!-- Local User Panel (ညာဘက်အောက်တွင် You ကို ထားရှိထားသည်) -->
+  <div class="video-card">
+    <video id="localVideo" autoplay muted playsinline></video>
+    <span class="label video-label-br">You</span>
+    <div class="chat-overlay" id="chatOverlay"></div>
+  </div>
+</div>
+        
+
+        <!-- You Video Card -->
+        <div class="video-card">
+          <video id="localVideo" autoplay muted playsinline></video>
+          <span class="label video-label-br">You</span>
+          <div class="chat-overlay" id="chatOverlay"></div>
+        </div>
+      </div>
+
+      <!-- Video Control Input Bar -->
+      <form class="chat-input-bar" id="chatForm" onsubmit="handleChatSubmit(event)">
+        <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" />
+        <button type="submit" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+
+      <div class="controls-wrapper">
+        <button class="btn-stop" id="startStopBtn" onclick="toggleStartStop()">Start</button>
+        <button class="btn-next" id="nextBtn" onclick="nextMatch()" disabled>Next Match</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
