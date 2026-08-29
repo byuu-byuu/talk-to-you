@@ -1,12 +1,25 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-app.use(express.static('public')); // .html, .css, .js ဖိုင်များ ထားရန်နေရာ
+// Static files (html, css, js) များကို ဖတ်ပေးရန်
+app.use(express.static(__dirname));
+
+// Route များကို သတ်မှတ်ခြင်း
+// 1. Root URL သို့ဝင်ပါက login.html သို့ အရင်ပို့ပေးမည်
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'));
+});
+
+// 2. Home page သို့ဝင်ပါက index.html ကို ပြပေးမည်
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 let waitingUser = null; // Pair တွဲဖို့ စောင့်နေသူကို သိမ်းထားရန် Variable
 
@@ -45,12 +58,3 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-const path = require('path');
-
-// Static files များကို သုံးခွင့်ပေးရန်
-app.use(express.static(__dirname));
-
-// Home page (/) သို့ဝင်ပါက index.html ကို ပြပေးရန်
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});

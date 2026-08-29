@@ -12,17 +12,6 @@
 </head>
 <body class="dark-theme">
 
-  <!-- form here form here from here-->
-    <video id="localVideo" autoplay muted playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
-
-    <!-- Socket.io လိုအပ်သော Library ချိတ်ခြင်း (Server ကနေ အလိုအလျောက် ယူသုံးပါတယ်) -->
-    <script src="/socket.io/socket.io.js"></script>
-    
-    <!-- ကိုယ့်ရဲ့ JavaScript ဖိုင် (project.js) ချိတ်ခြင်း -->
-    <script src="project.js"></script>
-   <!-- to here to here to here-->
-
   <div class="app-container">
     
     <!-- 1. LEFT SIDEBAR NAV -->
@@ -82,8 +71,8 @@
         <section id="profileTab" class="tab-page hidden">
           <h3>User Profile</h3>
           
-          <!-- <div class="profile-card-container">
-            <-- Profile Display Box (Top Section) --
+          <div class="profile-card-container">
+            <!-- Profile Display Box (Top Section) -->
             <div class="profile-header-display">
               <div class="avatar-wrapper">
                 <img id="profilePreview" src="https://via.placeholder.com/100" alt="Avatar">
@@ -91,20 +80,7 @@
                 <label for="avatarInput" class="upload-btn-overlay" id="uploadBtnLabel">
                   <i class="fa-solid fa-camera"></i> <span id="uploadBtnText">Upload Picture</span>
                 </label>
-              </div> -->
-              <!-- f r o m h e r e -->
-               <div class="profile-card-container">
-                <!-- Profile Display Box (Top Section) -->
-                <div class="profile-header-display">
-                  <div class="avatar-wrapper">
-                    <img id="profilePreview" src="https://via.placeholder.com/100" alt="Avatar">
-                    <input type="file" id="avatarInput" accept="image/*" onchange="previewImage(event)">
-                    <!-- Circle Arc ပေါ်ရှိ Icon Badge -->
-                    <label for="avatarInput" class="avatar-badge-btn" id="uploadBtnLabel">
-                      <i class="fa-solid fa-camera" id="avatarBadgeIcon"></i>
-                    </label>
-                  </div>
-               <!-- t o h e r e -->
+              </div>
 
               <div class="user-text-info">
                 <h4 id="displayHandle" class="user-handle-text">@username</h4>
@@ -130,15 +106,7 @@
             </div>
             <button type="button" class="btn-edit-profile" id="editProfileBtn" onclick="toggleProfileForm()">
               <i class="fa-solid fa-pen"></i> Edit Profile Data
-            </button> 
-          
-            <!-- Profile Card Section -->
-            <div class="profile-actions-container">
-              <button id="profileFollowBtn" class="action-btn follow" onclick="handleProfileFollow()">Follow</button>
-              <button id="profileMsgBtn" class="action-btn message" onclick="openMessagePanel()">
-                <i class="fas fa-comment"></i> Message
-              </button>
-            </div>
+            </button>
 
             <!-- Profile Input Form -->
             <form id="profileForm" class="profile-form" onsubmit="saveProfileData(event)">
@@ -272,14 +240,10 @@
          <!-- Video Grid Area -->
 <div class="video-grid">
   <!-- Remote Partner Panel (ဘယ်ဘက်အောက် ရောက်စေရန် video-label-bl ထည့်ထားသည်) -->
- <!-- Partner Video Tag & Overlay Label -->
-<div class="video-card">
-  <video id="remoteVideo" autoplay playsinline></video>
-  <div class="video-label-container">
-    <span id="remoteLabel">Offline</span>
-    <button id="videoFollowBtn" class="follow-btn hidden" onclick="handleVideoFollow()">Follow</button>
+  <div class="video-card">
+    <video id="remoteVideo" autoplay playsinline></video>
+    <span class="label video-label-br video-label-bl" id="remoteLabel">Offline</span>
   </div>
-</div>
 
   <!-- Local User Panel (ညာဘက်အောက်တွင် You ကို ထားရှိထားသည်) -->
   <div class="video-card">

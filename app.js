@@ -130,7 +130,7 @@ function nextMatch() {
  */
 /*1.. MODIFICATION ToggleStartStop and NextStep */
 // Random သုံးမည့် Nicknames များ
-/* const randomNicknames = ["Alex", "Sophia", "Daniel", "Emma", "Michael", "Chloe", "Lucas", "Maya"];
+const randomNicknames = ["Alex", "Sophia", "Daniel", "Emma", "Michael", "Chloe", "Lucas", "Maya"];
 
 function toggleStartStop() {
   const startStopBtn = document.getElementById("startStopBtn");
@@ -193,7 +193,7 @@ function nextMatch() {
       }
     }, 1500);
   }
-} */
+}
 
 /* INSERTION OPEN MESSAGE PANEL/ CLOSE MESSAGE PANNEL */// Function to open panel on mouseover
 function openMessagePanel() {
@@ -411,74 +411,5 @@ function updateBioCounter() {
 // const bioVal = document.getElementById("profBio")?.value.trim().slice(0, 25) || "";
 
 /* t o h e r e */
-// --- FOLLOW STATE MANAGEMENT ---
-let followState = "follow"; // 'follow', 'following', 'friend'
-let isMutualFollow = false; // Server မှ Mutual Follow လာစစ်ရန်
 
-// Live Match ဖြစ်သည့်အခါ Button ပေါ်စေရန်
-function handleMatchConnected() {
-  const videoFollowBtn = document.getElementById("videoFollowBtn");
-  if (videoFollowBtn) {
-    videoFollowBtn.classList.remove("hidden");
-    updateFollowUI();
-  }
-}
-
-// Live Video ဘေးမှ Follow Button ကို Click လုပ်သည့်အခါ
-function handleVideoFollow() {
-  if (followState === "follow") {
-    followState = isMutualFollow ? "friend" : "following";
-  } else {
-    followState = "follow";
-  }
-  updateFollowUI();
-}
-
-// Profile Tab ထဲမှ Follow/Unfollow Button ကို Click လုပ်သည့်အခါ
-function handleProfileFollow() {
-  if (followState === "follow") {
-    followState = "following";
-  } else {
-    followState = "follow";
-  }
-  updateFollowUI();
-}
-
-// Follow Buttons UI များ အားလုံးကို Sync လုပ်ပေးရန်
-function updateFollowUI() {
-  const vBtn = document.getElementById("videoFollowBtn");
-  const pBtn = document.getElementById("profileFollowBtn");
-
-  if (vBtn) {
-    if (followState === "following") {
-      vBtn.innerText = "Following";
-      vBtn.className = "follow-btn following";
-    } else if (followState === "friend") {
-      vBtn.innerText = "Friend";
-      vBtn.className = "follow-btn friend";
-    } else {
-      vBtn.innerText = "Follow";
-      vBtn.className = "follow-btn";
-    }
-  }
-
-  if (pBtn) {
-    if (followState === "following" || followState === "friend") {
-      pBtn.innerText = "Unfollow";
-      pBtn.className = "action-btn unfollow";
-    } else {
-      pBtn.innerText = "Follow";
-      pBtn.className = "action-btn follow";
-    }
-  }
-}
-
-// Match ပြတ်သွားပါက Video Follow Button ပြန်ဖျောက်ရန်
-function handleMatchDisconnected() {
-  const videoFollowBtn = document.getElementById("videoFollowBtn");
-  if (videoFollowBtn) videoFollowBtn.classList.add("hidden");
-  followState = "follow";
-  updateFollowUI();
-}
-/* t o h e r e */
 

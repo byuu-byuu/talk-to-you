@@ -426,30 +426,13 @@ body {
   padding: 10px;
 }
 
-  .profile-header-display {
+.profile-header-display {
   display: flex;
   align-items: center;
   gap: 16px;
   background: rgba(255, 255, 255, 0.05);
   padding: 15px;
   border-radius: 12px;
-} 
- .avatar-badge-btn {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  background: #ff477e;
-  color: #ffffff;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 2px solid #ffffff;
-  font-size: 10;
-  transition: transform 0.2s;
 }
 
 .avatar-wrapper {
@@ -493,7 +476,7 @@ body {
 .user-text-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   overflow: hidden;
 }
 
@@ -681,57 +664,6 @@ body, body.dark-theme {
 .avatar-wrapper {
   border: 3px solid #ec4899 !important;
 }
-/* f r o m h e r e */
-/* Video Label & Follow Button */
- .video-label-container {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 6px 12px;
-  border-radius: 20px;
-  backdrop-filter: blur(4px);
-}
- 
-.follow-btn {
-  background: #ff477e;
-  color: white;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.follow-btn.following { background: #6c757d; }
-.follow-btn.friend { background: #28a745; }
-
-/* Profile Action Buttons */
-.profile-actions-container {
-  display: flex;
-  gap: 10px;
-  margin: 12px 0;
-}
-
-.action-btn {
-  flex: 1;
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.action-btn.follow { background: #ff477e; color: white; }
-.action-btn.unfollow { background: #e9ecef; color: #495057; }
-.action-btn.message { background: #f0f2f5; color: #ff477e; border: 1px solid #ff477e; }
-/* t o h e r e */
-
 }
 
 
