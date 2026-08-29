@@ -45,3 +45,12 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const path = require('path');
+
+// Static files များကို သုံးခွင့်ပေးရန်
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Home page (/) သို့ဝင်ပါက index.html ကို ပြပေးရန်
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
