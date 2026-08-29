@@ -48,7 +48,7 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 const path = require('path');
 
 // Static files များကို သုံးခွင့်ပေးရန်
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // Home page (/) သို့ဝင်ပါက index.html ကို ပြပေးရန်
 app.get('/', (req, res) => {
